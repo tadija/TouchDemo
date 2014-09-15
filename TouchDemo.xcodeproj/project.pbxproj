@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8B993E8619C70B7C008E1A41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B993E8519C70B7C008E1A41 /* AppDelegate.swift */; };
-		8B993E8819C70B7C008E1A41 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B993E8719C70B7C008E1A41 /* ViewController.swift */; };
 		8B993E8B19C70B7C008E1A41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B993E8919C70B7C008E1A41 /* Main.storyboard */; };
 		8B993E8D19C70B7C008E1A41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B993E8C19C70B7C008E1A41 /* Images.xcassets */; };
 		8B993E9019C70B7C008E1A41 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B993E8E19C70B7C008E1A41 /* LaunchScreen.xib */; };
 		8B993E9C19C70B7C008E1A41 /* TouchDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B993E9B19C70B7C008E1A41 /* TouchDemoTests.swift */; };
+		8B993EAC19C70B95008E1A41 /* AEColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B993EA519C70B95008E1A41 /* AEColor.swift */; };
+		8B993EAD19C70B95008E1A41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B993EA619C70B95008E1A41 /* AppDelegate.swift */; };
+		8B993EAE19C70B95008E1A41 /* DotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B993EA719C70B95008E1A41 /* DotView.swift */; };
+		8B993EAF19C70B95008E1A41 /* OverlayScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B993EA819C70B95008E1A41 /* OverlayScrollView.swift */; };
+		8B993EB019C70B95008E1A41 /* TouchDelayGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B993EA919C70B95008E1A41 /* TouchDelayGestureRecognizer.swift */; };
+		8B993EB119C70B95008E1A41 /* TouchIndicatorGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B993EAA19C70B95008E1A41 /* TouchIndicatorGestureRecognizer.swift */; };
+		8B993EB219C70B95008E1A41 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B993EAB19C70B95008E1A41 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,14 +33,19 @@
 /* Begin PBXFileReference section */
 		8B993E8019C70B7C008E1A41 /* TouchDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B993E8419C70B7C008E1A41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8B993E8519C70B7C008E1A41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8B993E8719C70B7C008E1A41 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8B993E8A19C70B7C008E1A41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8B993E8C19C70B7C008E1A41 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8B993E8F19C70B7C008E1A41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		8B993E9519C70B7C008E1A41 /* TouchDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TouchDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B993E9A19C70B7C008E1A41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B993E9B19C70B7C008E1A41 /* TouchDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchDemoTests.swift; sourceTree = "<group>"; };
+		8B993EA519C70B95008E1A41 /* AEColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AEColor.swift; sourceTree = "<group>"; };
+		8B993EA619C70B95008E1A41 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8B993EA719C70B95008E1A41 /* DotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotView.swift; sourceTree = "<group>"; };
+		8B993EA819C70B95008E1A41 /* OverlayScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayScrollView.swift; sourceTree = "<group>"; };
+		8B993EA919C70B95008E1A41 /* TouchDelayGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchDelayGestureRecognizer.swift; sourceTree = "<group>"; };
+		8B993EAA19C70B95008E1A41 /* TouchIndicatorGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchIndicatorGestureRecognizer.swift; sourceTree = "<group>"; };
+		8B993EAB19C70B95008E1A41 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +87,13 @@
 		8B993E8219C70B7C008E1A41 /* TouchDemo */ = {
 			isa = PBXGroup;
 			children = (
-				8B993E8519C70B7C008E1A41 /* AppDelegate.swift */,
-				8B993E8719C70B7C008E1A41 /* ViewController.swift */,
+				8B993EA619C70B95008E1A41 /* AppDelegate.swift */,
+				8B993EAB19C70B95008E1A41 /* ViewController.swift */,
+				8B993EA519C70B95008E1A41 /* AEColor.swift */,
+				8B993EA719C70B95008E1A41 /* DotView.swift */,
+				8B993EA819C70B95008E1A41 /* OverlayScrollView.swift */,
+				8B993EA919C70B95008E1A41 /* TouchDelayGestureRecognizer.swift */,
+				8B993EAA19C70B95008E1A41 /* TouchIndicatorGestureRecognizer.swift */,
 				8B993E8919C70B7C008E1A41 /* Main.storyboard */,
 				8B993E8C19C70B7C008E1A41 /* Images.xcassets */,
 				8B993E8E19C70B7C008E1A41 /* LaunchScreen.xib */,
@@ -212,8 +227,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B993E8819C70B7C008E1A41 /* ViewController.swift in Sources */,
-				8B993E8619C70B7C008E1A41 /* AppDelegate.swift in Sources */,
+				8B993EAD19C70B95008E1A41 /* AppDelegate.swift in Sources */,
+				8B993EAC19C70B95008E1A41 /* AEColor.swift in Sources */,
+				8B993EAF19C70B95008E1A41 /* OverlayScrollView.swift in Sources */,
+				8B993EAE19C70B95008E1A41 /* DotView.swift in Sources */,
+				8B993EB219C70B95008E1A41 /* ViewController.swift in Sources */,
+				8B993EB019C70B95008E1A41 /* TouchDelayGestureRecognizer.swift in Sources */,
+				8B993EB119C70B95008E1A41 /* TouchIndicatorGestureRecognizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,9 +358,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TouchDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -348,6 +370,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = TouchDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
