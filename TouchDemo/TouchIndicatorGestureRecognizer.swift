@@ -66,14 +66,14 @@ class TouchIndicatorGestureRecognizer: UIGestureRecognizer {
     }
     
     func createIndicatorView(touch: UITouch) {
-        self.state = .Began
+        state = .Began
         
         let indicator = TouchIndicatorGestureRecognizer.indicator()
         indicator.center = touch.locationInView(view)
         indicator.transform = CGAffineTransformMakeScale(0.01, 0.01)
         indicator.layer.zPosition = CGFloat(MAXFLOAT);
         
-        if let gestureView = self.view {
+        if let gestureView = view {
             gestureView.addSubview(indicator)
             activeTouches[touch] = indicator
         }
@@ -86,7 +86,7 @@ class TouchIndicatorGestureRecognizer: UIGestureRecognizer {
     func moveIndicatorView(touch: UITouch) {
         if let indicator = activeTouches[touch] {
             indicator.center = touch.locationInView(view)
-            self.state = .Changed
+            state = .Changed
         }
     }
     

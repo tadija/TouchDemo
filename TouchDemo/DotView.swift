@@ -20,9 +20,13 @@ class DotView: UIView {
     var highlighted: Bool? {
         willSet {
             if newValue == true {
-                backgroundColor = color?.darkerColorWithFactor()
+                if let c = color {
+                    backgroundColor = c.darkerColorWithFactor()
+                }
             } else {
-                backgroundColor = color
+                if let c = color {
+                    backgroundColor = c
+                }
             }
         }
     }
