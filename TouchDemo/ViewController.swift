@@ -133,7 +133,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func grabDot(dot: UIView, withGesture gesture: UIGestureRecognizer) {
-        let dotFromDrawer = dot.superview!.isEqual(drawerView.contentView)
+        let dotFromDrawer = dot.superview === drawerView.contentView
         
         dot.center = view.convertPoint(dot.center, fromView: dot.superview)
         view.addSubview(dot)
@@ -173,7 +173,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         dot.center = view.convertPoint(dot.center, toView: dot.superview)
         
-        if dot.superview!.isEqual(drawerView.contentView) {
+        if dot.superview === drawerView.contentView {
             DotView.arrangeDotsNeatlyInViewWithNiftyAnimation(drawerView.contentView)
         }
     }
