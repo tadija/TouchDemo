@@ -28,15 +28,15 @@ class TouchDelayGestureRecognizer: UIGestureRecognizer {
     
     // MARK: - Override
     
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesBegan(touches: Set<NSObject>!, withEvent event: UIEvent!) {
         timer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: Selector("fail"), userInfo: nil, repeats: false)
     }
     
-    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesEnded(touches: Set<NSObject>!, withEvent event: UIEvent!) {
         fail()
     }
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
         fail()
     }
     
