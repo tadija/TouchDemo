@@ -34,7 +34,7 @@ class DotView: UIView {
     // MARK: - Init
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     init(color: UIColor, radius: CGFloat) {
@@ -45,27 +45,28 @@ class DotView: UIView {
         layer.cornerRadius = radius / 2
     }
     
-    convenience override init() {
+    convenience override init(frame: CGRect) {
         let randomColor = UIColor.randomVividColor()
         let randomRadius = DotView.randomValueFrom(Int(kMinimumDotRadius), to: Int(kMaximumDotRadius))
         self.init(color: randomColor, radius: randomRadius)
     }
+
     
     class func randomValueFrom(fromValue: Int, to toValue: Int) -> CGFloat {
-        return CGFloat(arc4random_uniform(UInt32(toValue - fromValue)) + fromValue)
+        return CGFloat(arc4random_uniform(UInt32(toValue - fromValue)) + UInt32(fromValue))
     }
     
     // MARK: - Override
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         highlighted = true
     }
     
-    override func touchesEnded(touches: NSSet, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         highlighted = false
     }
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
         highlighted = false
     }
     
