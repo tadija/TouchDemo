@@ -64,7 +64,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func addDots(count: Int, toView view: UIView) {
-        for i in 1...count {
+        for _ in 1...count {
             let dot = DotView()
             view.addSubview(dot)
             
@@ -85,15 +85,15 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         super.updateViewConstraints()
         
         let views = ["canvasView" : canvasView, "scrollView" : scrollView]
-        for (name, view) in views {
-            view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        for (_, view) in views {
+            view.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[canvasView]|", options: nil, metrics: nil, views: views))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[canvasView]|", options: nil, metrics: nil, views: views))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[canvasView]|", options: [], metrics: nil, views: views))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[canvasView]|", options: [], metrics: nil, views: views))
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[scrollView]|", options: nil, metrics: nil, views: views))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[scrollView]|", options: nil, metrics: nil, views: views))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[scrollView]|", options: [], metrics: nil, views: views))
+        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[scrollView]|", options: [], metrics: nil, views: views))
     }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
@@ -127,7 +127,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             case .Ended, .Cancelled:
                 dropDot(dot, withGesture: gesture)
             default:
-                println("gesture state not implemented")
+                print("gesture state not implemented")
             }
         }
     }

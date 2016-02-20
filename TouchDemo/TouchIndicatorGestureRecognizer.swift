@@ -20,37 +20,37 @@ class TouchIndicatorGestureRecognizer: UIGestureRecognizer {
     
     // MARK: - Init
     
-    override init(target: AnyObject, action: Selector) {
+    override init(target: AnyObject?, action: Selector) {
         super.init(target: target, action: action)
         cancelsTouchesInView = false
     }
     
     // MARK: - Override
     
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
         super.touchesBegan(touches, withEvent: event)
-        for touch in touches.allObjects as [UITouch] {
+        for touch in touches {
             createIndicatorView(touch)
         }
     }
     
-    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent) {
         super.touchesMoved(touches, withEvent: event)
-        for touch in touches.allObjects as [UITouch] {
+        for touch in touches {
             moveIndicatorView(touch)
         }
     }
     
-    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent) {
         super.touchesEnded(touches, withEvent: event)
-        for touch in touches.allObjects as [UITouch] {
+        for touch in touches {
             removeIndicatorView(touch)
         }
     }
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesCancelled(touches: Set<UITouch>, withEvent event: UIEvent) {
         super.touchesCancelled(touches, withEvent: event)
-        for touch in touches.allObjects as [UITouch] {
+        for touch in touches{
             removeIndicatorView(touch)
         }
     }
