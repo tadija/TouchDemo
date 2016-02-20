@@ -21,22 +21,22 @@ class TouchDelayGestureRecognizer: UIGestureRecognizer {
     
     // MARK: - Init
     
-    override init(target: AnyObject, action: Selector) {
+    override init(target: AnyObject?, action: Selector) {
         super.init(target: target, action: action)
         delaysTouchesBegan = true
     }
     
     // MARK: - Override
     
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
         timer = NSTimer.scheduledTimerWithTimeInterval(0.15, target: self, selector: Selector("fail"), userInfo: nil, repeats: false)
     }
     
-    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent) {
         fail()
     }
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+    override func touchesCancelled(touches: Set<UITouch>, withEvent event: UIEvent) {
         fail()
     }
     

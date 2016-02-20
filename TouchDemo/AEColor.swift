@@ -17,18 +17,18 @@ extension UIColor {
         var red: CGFloat = 0.0, green: CGFloat = 0.0, blue: CGFloat = 0.0, alpha: CGFloat = 1.0
         
         if (hex.hasPrefix("#")) {
-            hex = hex.substringFromIndex(advance(hex.startIndex, 1))
+            hex = hex.substringFromIndex(hex.startIndex.advancedBy(1))
         }
         
-        let scanner = NSScanner.scannerWithString(hex)
+        let scanner = NSScanner(string: hex)
         var hexValue: UInt32 = 0
         if scanner.scanHexInt(&hexValue) {
-            if countElements(hex) == 8 {
+            if hex.characters.count == 8 {
                 red   = CGFloat((hexValue & 0xFF000000) >> 24) / 255.0
                 green = CGFloat((hexValue & 0x00FF0000) >> 16) / 255.0
                 blue  = CGFloat((hexValue & 0x0000FF00) >> 8) / 255.0
                 alpha = CGFloat((hexValue & 0x000000FF)) / 255.0
-            } else if countElements(hex) == 6 {
+            } else if hex.characters.count == 6 {
                 red   = CGFloat((hexValue & 0xFF0000) >> 16) / 255.0
                 green = CGFloat((hexValue & 0x00FF00) >> 8) / 255.0
                 blue  = CGFloat((hexValue & 0x0000FF)) / 255.0
@@ -64,21 +64,21 @@ extension UIColor {
         
         var hue: CGFloat = 0.0, saturation: CGFloat = 0.0, brightness: CGFloat = 0.0, alpha: CGFloat = 0.0, white: CGFloat = 0.0
         
-        switch colorSpaceModel.value {
-        case kCGColorSpaceModelRGB.value:
+        switch colorSpaceModel.rawValue {
+        case CGColorSpaceModel.RGB.rawValue:
             if self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
                 saturation -= saturation * factor;
                 brightness += (1.0 - brightness) * factor;
                 lighterColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
             }
-        case kCGColorSpaceModelMonochrome.value:
+        case CGColorSpaceModel.Monochrome.rawValue:
             if self.getWhite(&white, alpha: &alpha) {
                 white += factor;
                 white = (white > 1.0) ? 1.0 : white; // set max white
                 lighterColor = UIColor(white: white, alpha: alpha)
             }
         default:
-            println("CGColorSpaceModel: \(colorSpaceModel) is not implemented")
+            print("CGColorSpaceModel: \(colorSpaceModel) is not implemented")
         }
         
         return lighterColor
@@ -90,21 +90,21 @@ extension UIColor {
         
         var hue: CGFloat = 0.0, saturation: CGFloat = 0.0, brightness: CGFloat = 0.0, alpha: CGFloat = 0.0, white: CGFloat = 0.0
         
-        switch colorSpaceModel.value {
-        case kCGColorSpaceModelRGB.value:
+        switch colorSpaceModel.rawValue {
+        case CGColorSpaceModel.RGB.rawValue:
             if self.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
                 brightness -= brightness * factor;
                 saturation += (1.0 - saturation) * factor;
                 darkerColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
             }
-        case kCGColorSpaceModelMonochrome.value:
+        case CGColorSpaceModel.Monochrome.rawValue:
             if self.getWhite(&white, alpha: &alpha) {
                 white -= factor;
                 white = (white < 0.0) ? 0.0 : white; // set min white
                 darkerColor = UIColor(white: white, alpha: alpha)
             }
         default:
-            println("CGColorSpaceModel: \(colorSpaceModel) is not implemented")
+            print("CGColorSpaceModel: \(colorSpaceModel) is not implemented")
         }
         
         return darkerColor
