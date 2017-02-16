@@ -49,42 +49,42 @@ class DotView: UIView {
     convenience override init(frame: CGRect) {
         let randomColor = UIColor.randomVividColor()
         let randomRadius = DotView.randomValueFrom(Int(kMinimumDotRadius), to: Int(kMaximumDotRadius))
-        self.init(color: randomColor, radius: randomRadius)
+        self.init(color: randomColor!, radius: randomRadius)
     }
     
-    class func randomValueFrom(fromValue: Int, to toValue: Int) -> CGFloat {
+    class func randomValueFrom(_ fromValue: Int, to toValue: Int) -> CGFloat {
         return CGFloat(arc4random_uniform(UInt32(toValue - fromValue)) + UInt32(fromValue))
     }
     
     // MARK: - Override
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         highlighted = true
     }
     
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         highlighted = false
     }
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         highlighted = false
     }
     
     
     // enlarges hit area for very small dots
-    override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
+    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         var touchBounds = bounds
         if layer.cornerRadius < 22.0 {
             let expansion = 22.0 - layer.cornerRadius
-            touchBounds = CGRectInset(touchBounds, -expansion, -expansion)
+            touchBounds = touchBounds.insetBy(dx: -expansion, dy: -expansion)
         }
-        return CGRectContainsPoint(touchBounds, point)
+        return touchBounds.contains(point)
     }
     
     // MARK: - Arrange Dots
     
-    class func arrangeDotsRandomlyInView(containerView: UIView) {
+    class func arrangeDotsRandomlyInView(_ containerView: UIView) {
         let size = containerView.bounds.size
         for view in containerView.subviews {
             if let dot = view as? DotView {
@@ -96,7 +96,7 @@ class DotView: UIView {
         }
     }
     
-    class func arrangeDotsNeatlyInView(containerView: UIView) {
+    class func arrangeDotsNeatlyInView(_ containerView: UIView) {
         let width: CGFloat = containerView.bounds.size.width
         let neatFactor: CGFloat = width < 600.0 ? 0 : width < 1024.0 ? 1 : 2;
         
@@ -125,8 +125,8 @@ class DotView: UIView {
         }
     }
     
-    class func arrangeDotsNeatlyInViewWithNiftyAnimation(containerView: UIView) {
-        UIView.animateWithDuration(0.4, animations: { () -> Void in
+    class func arrangeDotsNeatlyInViewWithNiftyAnimation(_ containerView: UIView) {
+        UIView.animate(withDuration: 0.4, animations: { () -> Void in
             DotView.arrangeDotsNeatlyInView(containerView)
         })
     }

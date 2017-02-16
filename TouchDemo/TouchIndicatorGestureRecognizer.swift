@@ -20,36 +20,36 @@ class TouchIndicatorGestureRecognizer: UIGestureRecognizer {
     
     // MARK: - Init
     
-    override init(target: AnyObject?, action: Selector) {
+    override init(target: Any?, action: Selector?) {
         super.init(target: target, action: action)
         cancelsTouchesInView = false
     }
     
     // MARK: - Override
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent) {
-        super.touchesBegan(touches, withEvent: event)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesBegan(touches, with: event)
         for touch in touches {
             createIndicatorView(touch)
         }
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent) {
-        super.touchesMoved(touches, withEvent: event)
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesMoved(touches, with: event)
         for touch in touches {
             moveIndicatorView(touch)
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent) {
-        super.touchesEnded(touches, withEvent: event)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesEnded(touches, with: event)
         for touch in touches {
             removeIndicatorView(touch)
         }
     }
     
-    override func touchesCancelled(touches: Set<UITouch>, withEvent event: UIEvent) {
-        super.touchesCancelled(touches, withEvent: event)
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
+        super.touchesCancelled(touches, with: event)
         for touch in touches{
             removeIndicatorView(touch)
         }
@@ -59,18 +59,18 @@ class TouchIndicatorGestureRecognizer: UIGestureRecognizer {
     
     class func indicator() -> UIView {
         let indicator = UIView(frame: CGRect(x: 0, y: 0, width: 20.0, height: 20.0))
-        indicator.backgroundColor = UIColor.whiteColor()
+        indicator.backgroundColor = UIColor.white
         indicator.alpha = 0.8
         indicator.layer.cornerRadius = 10.0
         return indicator
     }
     
-    func createIndicatorView(touch: UITouch) {
-        state = .Began
+    func createIndicatorView(_ touch: UITouch) {
+        state = .began
         
         let indicator = TouchIndicatorGestureRecognizer.indicator()
-        indicator.center = touch.locationInView(view)
-        indicator.transform = CGAffineTransformMakeScale(0.01, 0.01)
+        indicator.center = touch.location(in: view)
+        indicator.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
         indicator.layer.zPosition = CGFloat(MAXFLOAT);
         
         if let gestureView = view {
@@ -78,27 +78,27 @@ class TouchIndicatorGestureRecognizer: UIGestureRecognizer {
             activeTouches[touch] = indicator
         }
         
-        UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .AllowUserInteraction, animations: { () -> Void in
-            indicator.transform = CGAffineTransformIdentity
+        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .allowUserInteraction, animations: { () -> Void in
+            indicator.transform = CGAffineTransform.identity
         }, completion: nil)
     }
     
-    func moveIndicatorView(touch: UITouch) {
+    func moveIndicatorView(_ touch: UITouch) {
         if let indicator = activeTouches[touch] {
-            indicator.center = touch.locationInView(view)
-            state = .Changed
+            indicator.center = touch.location(in: view)
+            state = .changed
         }
     }
     
-    func removeIndicatorView(touch: UITouch) {
+    func removeIndicatorView(_ touch: UITouch) {
         if let indicator = activeTouches[touch] {
-            UIView.animateWithDuration(0.2, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .AllowUserInteraction, animations: { () -> Void in
-                indicator.transform = CGAffineTransformMakeScale(0.01, 0.01)
+            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .allowUserInteraction, animations: { () -> Void in
+                indicator.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
                 }, completion: { (finished) -> Void in
                     indicator.removeFromSuperview()
-                    self.activeTouches.removeValueForKey(touch)
+                    self.activeTouches.removeValue(forKey: touch)
                     if self.activeTouches.count == 0 {
-                        self.state = .Ended
+                        self.state = .ended
                     }
             })
         }

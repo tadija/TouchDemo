@@ -20,8 +20,8 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let width = view.bounds.size.width
         let height = view.bounds.size.height
         switch view.traitCollection.userInterfaceIdiom {
-        case .Phone:
-            return UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication().statusBarOrientation) ? width : height / 1.4
+        case .phone:
+            return UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) ? width : height / 1.4
         default:
             return height / 1.9
         }
@@ -35,18 +35,18 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let bounds = self.view.bounds
         
         canvasView = UIView(frame: bounds)
-        canvasView.backgroundColor = UIColor.darkGrayColor()
+        canvasView.backgroundColor = UIColor.darkGray
         view.addSubview(canvasView)
         
         scrollView = OverlayScrollView(frame: bounds)
         view.addSubview(scrollView)
         
-        drawerView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
+        drawerView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         scrollView.addSubview(drawerView)
 
         let device = view.traitCollection.userInterfaceIdiom
-        addDots(device == .Pad ? 25 : 10, toView: canvasView)
-        addDots(device == .Pad ? 20 : 7, toView: drawerView.contentView)
+        addDots(device == .pad ? 25 : 10, toView: canvasView)
+        addDots(device == .pad ? 20 : 7, toView: drawerView.contentView)
         self.arrangeDotsAndDrawerWithinSize(bounds.size)
         
         // move scrollview's gesture recognizer to the superview
@@ -63,19 +63,19 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addGestureRecognizer(touchIndicator)
     }
     
-    func addDots(count: Int, toView view: UIView) {
+    func addDots(_ count: Int, toView view: UIView) {
         for _ in 1...count {
             let dot = DotView()
             view.addSubview(dot)
             
-            let longPress = UILongPressGestureRecognizer(target: self, action: Selector("handleLongPress:"))
+            let longPress = UILongPressGestureRecognizer(target: self, action: #selector(ViewController.handleLongPress(_:)))
             longPress.cancelsTouchesInView = false
             longPress.delegate = self
             dot.addGestureRecognizer(longPress)
         }
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -86,25 +86,25 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         let views = ["canvasView" : canvasView, "scrollView" : scrollView]
         for (_, view) in views {
-            view.translatesAutoresizingMaskIntoConstraints = false
+            view?.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[canvasView]|", options: [], metrics: nil, views: views))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[canvasView]|", options: [], metrics: nil, views: views))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[canvasView]|", options: [], metrics: nil, views: views))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[canvasView]|", options: [], metrics: nil, views: views))
         
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[scrollView]|", options: [], metrics: nil, views: views))
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[scrollView]|", options: [], metrics: nil, views: views))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: views))
+        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: views))
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         
-        coordinator.animateAlongsideTransition({ (context) -> Void in
+        coordinator.animate(alongsideTransition: { (context) -> Void in
             self.arrangeDotsAndDrawerWithinSize(size)
         }, completion: nil)
     }
     
-    func arrangeDotsAndDrawerWithinSize(size: CGSize) {
+    func arrangeDotsAndDrawerWithinSize(_ size: CGSize) {
         // set drawer size
         drawerView.frame = CGRect(x: 0, y: 0, width: size.width, height: drawerHeight)
         scrollView.contentSize = CGSize(width: size.width, height: size.height + drawerView.frame.size.height)
@@ -117,14 +117,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - Gestures
     
-    func handleLongPress(gesture: UILongPressGestureRecognizer) {
+    func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
         if let dot = gesture.view {
             switch gesture.state {
-            case .Began:
+            case .began:
                 grabDot(dot, withGesture: gesture)
-            case .Changed:
+            case .changed:
                 moveDot(dot, withGesture: gesture)
-            case .Ended, .Cancelled:
+            case .ended, .cancelled:
                 dropDot(dot, withGesture: gesture)
             default:
                 print("gesture state not implemented")
@@ -132,14 +132,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
-    func grabDot(dot: UIView, withGesture gesture: UIGestureRecognizer) {
+    func grabDot(_ dot: UIView, withGesture gesture: UIGestureRecognizer) {
         let dotFromDrawer = dot.superview === drawerView.contentView
         
-        dot.center = view.convertPoint(dot.center, fromView: dot.superview)
+        dot.center = view.convert(dot.center, from: dot.superview)
         view.addSubview(dot)
         
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
-            dot.transform = CGAffineTransformMakeScale(1.2, 1.2)
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            dot.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             dot.alpha = 0.8
             self.moveDot(dot, withGesture: gesture)
         })
@@ -147,38 +147,38 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         // disable and re-enable scrollview's pan gesture recognizer so the drawer can't be opened with moving the dot view
         // disabling will cause it to stop tracking all the touches which it was tracking (including the long press)
         // re-enabling will allow it to be ready to track new touches that might start
-        scrollView.panGestureRecognizer.enabled = false;
-        scrollView.panGestureRecognizer.enabled = true;
+        scrollView.panGestureRecognizer.isEnabled = false;
+        scrollView.panGestureRecognizer.isEnabled = true;
         
         if dotFromDrawer {
             DotView.arrangeDotsNeatlyInViewWithNiftyAnimation(drawerView.contentView)
         }
     }
     
-    func moveDot(dot: UIView, withGesture gesture: UIGestureRecognizer) {
-        dot.center = gesture.locationInView(view)
+    func moveDot(_ dot: UIView, withGesture gesture: UIGestureRecognizer) {
+        dot.center = gesture.location(in: view)
     }
     
-    func dropDot(dot: UIView, withGesture gesture: UIGestureRecognizer) {
-        UIView.animateWithDuration(0.2, animations: { () -> Void in
-            dot.transform = CGAffineTransformIdentity
+    func dropDot(_ dot: UIView, withGesture gesture: UIGestureRecognizer) {
+        UIView.animate(withDuration: 0.2, animations: { () -> Void in
+            dot.transform = CGAffineTransform.identity
             dot.alpha = 1.0
         })
         
-        let locationInDrawer = gesture.locationInView(drawerView)
-        if CGRectContainsPoint(drawerView.bounds, locationInDrawer) {
+        let locationInDrawer = gesture.location(in: drawerView)
+        if drawerView.bounds.contains(locationInDrawer) {
             drawerView.contentView.addSubview(dot)
         } else {
             canvasView.addSubview(dot)
         }
-        dot.center = view.convertPoint(dot.center, toView: dot.superview)
+        dot.center = view.convert(dot.center, to: dot.superview)
         
         if dot.superview === drawerView.contentView {
             DotView.arrangeDotsNeatlyInViewWithNiftyAnimation(drawerView.contentView)
         }
     }
     
-    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         // we should be specific here because it's easy source of bugs
         // but in this example we do want that all of the gestures (long press, pan, indicator) to work simultaneously
         // so it's possible to move the dots with multiple fingers, and open drawer with other finger at the same time
