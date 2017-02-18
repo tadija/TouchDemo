@@ -16,7 +16,7 @@ class TouchIndicatorGestureRecognizer: UIGestureRecognizer {
     
     // MARK: - Properties
     
-    var activeTouches = [UITouch: UIView]()
+    var activeTouches = [UITouch : UIView]()
     
     // MARK: - Init
     
@@ -78,7 +78,9 @@ class TouchIndicatorGestureRecognizer: UIGestureRecognizer {
             activeTouches[touch] = indicator
         }
         
-        UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .allowUserInteraction, animations: { () -> Void in
+        UIView.animate(withDuration: 0.2, delay: 0,
+                       usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0,
+                       options: .allowUserInteraction, animations: { () -> Void in
             indicator.transform = CGAffineTransform.identity
         }, completion: nil)
     }
@@ -92,14 +94,16 @@ class TouchIndicatorGestureRecognizer: UIGestureRecognizer {
     
     func removeIndicatorView(_ touch: UITouch) {
         if let indicator = activeTouches[touch] {
-            UIView.animate(withDuration: 0.2, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .allowUserInteraction, animations: { () -> Void in
+            UIView.animate(withDuration: 0.2, delay: 0,
+                           usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0,
+                           options: .allowUserInteraction, animations: { () -> Void in
                 indicator.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-                }, completion: { (finished) -> Void in
-                    indicator.removeFromSuperview()
-                    self.activeTouches.removeValue(forKey: touch)
-                    if self.activeTouches.count == 0 {
-                        self.state = .ended
-                    }
+            }, completion: { (finished) -> Void in
+                indicator.removeFromSuperview()
+                self.activeTouches.removeValue(forKey: touch)
+                if self.activeTouches.count == 0 {
+                    self.state = .ended
+                }
             })
         }
     }

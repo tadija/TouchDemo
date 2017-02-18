@@ -47,7 +47,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let device = view.traitCollection.userInterfaceIdiom
         addDots(device == .pad ? 25 : 10, toView: canvasView)
         addDots(device == .pad ? 20 : 7, toView: drawerView.contentView)
-        self.arrangeDotsAndDrawerWithinSize(bounds.size)
+        arrangeDotsAndDrawerWithinSize(bounds.size)
         
         // move scrollview's gesture recognizer to the superview
         // because of the override in the OverlayScrollView (it's not hit testing, so gesture will not work)
@@ -84,16 +84,16 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     override func updateViewConstraints() {
         super.updateViewConstraints()
         
-        let views = ["canvasView" : canvasView, "scrollView" : scrollView]
+        let views: [String : UIView] = ["canvasView" : canvasView, "scrollView" : scrollView]
         for (_, view) in views {
-            view?.translatesAutoresizingMaskIntoConstraints = false
+            view.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[canvasView]|", options: [], metrics: nil, views: views))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[canvasView]|", options: [], metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[canvasView]|", options: [], metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[canvasView]|", options: [], metrics: nil, views: views))
         
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: views))
-        self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[scrollView]|", options: [], metrics: nil, views: views))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[scrollView]|", options: [], metrics: nil, views: views))
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

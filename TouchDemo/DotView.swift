@@ -8,8 +8,8 @@
 
 import UIKit
 
-let kMinimumDotRadius: CGFloat = 30.0;
-let kMaximumDotRadius: CGFloat = 100.0;
+let kMinimumDotRadius: CGFloat = 30.0
+let kMaximumDotRadius: CGFloat = 100.0
 
 class DotView: UIView {
 
