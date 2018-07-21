@@ -43,7 +43,14 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         drawerView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         scrollView.addSubview(drawerView)
-
+		
+		if #available(iOS 11.0, *) {
+			scrollView.contentInsetAdjustmentBehavior = .never
+		} else {
+			// Fallback on earlier versions
+			self.automaticallyAdjustsScrollViewInsets = false
+		}
+		
         let device = view.traitCollection.userInterfaceIdiom
         addDots(device == .pad ? 25 : 10, toView: canvasView)
         addDots(device == .pad ? 20 : 7, toView: drawerView.contentView)
@@ -73,10 +80,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             longPress.delegate = self
             dot.addGestureRecognizer(longPress)
         }
-    }
-
-    override var prefersStatusBarHidden : Bool {
-        return true
     }
     
     // MARK: - Layout
