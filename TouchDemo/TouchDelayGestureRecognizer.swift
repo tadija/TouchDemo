@@ -42,7 +42,7 @@ class TouchDelayGestureRecognizer: UIGestureRecognizer {
         fail()
     }
     
-    func fail() {
+    @objc func fail() {
         state = .failed
     }
     

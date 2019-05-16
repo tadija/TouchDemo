@@ -21,17 +21,17 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         let height = view.bounds.size.height
         switch view.traitCollection.userInterfaceIdiom {
         case .phone:
-            return UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) ? width : height / 1.4
+            return UIDevice.current.orientation.isPortrait ? width : height / 1.4
         default:
             return height / 1.9
         }
     }
     
     // MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         let bounds = self.view.bounds
         
         canvasView = UIView(frame: bounds)
@@ -43,7 +43,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         
         drawerView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
         scrollView.addSubview(drawerView)
-
+        
         let device = view.traitCollection.userInterfaceIdiom
         addDots(device == .pad ? 25 : 10, toView: canvasView)
         addDots(device == .pad ? 20 : 7, toView: drawerView.contentView)
@@ -74,7 +74,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
             dot.addGestureRecognizer(longPress)
         }
     }
-
+    
     override var prefersStatusBarHidden : Bool {
         return true
     }
@@ -117,7 +117,7 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
     
     // MARK: - Gestures
     
-    func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
+    @objc func handleLongPress(_ gesture: UILongPressGestureRecognizer) {
         if let dot = gesture.view {
             switch gesture.state {
             case .began:
@@ -184,6 +184,6 @@ class ViewController: UIViewController, UIGestureRecognizerDelegate {
         // so it's possible to move the dots with multiple fingers, and open drawer with other finger at the same time
         return true
     }
-
+    
 }
 
